@@ -1,3 +1,8 @@
+# Optimized by ci-cost (https://github.com/mariotavarez/ci-cost)
+# Applied 1 optimization:
+# - [MEDIUM] Add concurrency group to "ubuntu-tests.yaml"
+# Estimated savings: ~2 min/run
+#
 #
 # Copyright © 2023 – 2026 Red Hat, Inc.
 #
@@ -24,6 +29,10 @@ on:
   schedule:
     - cron: '0 0 * * *'
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   ubuntu-jammy-tests:
     runs-on: ubuntu-22.04
